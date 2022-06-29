@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: rudderlabs/rudder-transformer
+  repository: flipsasser/rudder-transformer
   version: latest
   pullPolicy: IfNotPresent
 

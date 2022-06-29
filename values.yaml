@@ -100,7 +100,7 @@ transformer:
   service:
     port: 9090
   image:
-    repository: rudderlabs/rudder-transformer
+    repository: flipsasser/rudder-transformer
     version: latest
     pullPolicy: Always
   resources:
@@ -108,61 +108,5 @@ transformer:
       memory: 256Mi
     limits:
       memory: 768Mi
-
-postgresql:
-  nameOverride: "rudderstack-postgresql"
-  host: put-host-here.azure.com
-  user: rudder
-  password: password
-  database: jobs
-  postgresqlRunAsUser: 70
-  imagePullPolicy: IfNotPresent
-  image:
-    repository: postgres
-    tag: "11-alpine"
-    pullPolicy: IfNotPresent
-  persistence:
-    size: 100Gi
-  replication:
-    enabled: false
-  service:
-    type: "ClusterIP"
-    port: 5432
-  resources:
-    requests:
-      memory: 2048Mi
-    limits:
-      memory: 4096Mi
-
-telegraf_sidecar:
-  enabled: false
-  name: telegraf
-  version: 1.5.0
-  nameOverride: "rudderstack"
-  image:
-    repo: "telegraf"
-    tag: "1.12-alpine"
-    pullPolicy: IfNotPresent
-  resources:
-    requests:
-      memory: 128Mi
-      cpu: 100m
-    limits:
-      memory: 128Mi
-      cpu: 100m
-  config:
-    mountPath: /etc/telegraf
-    agent:
-      interval: "10s"
-    outputs:
-      - influxdb:
-          urls: []
-          #            - "http://influxdb.monitoring.svc:8086"
-          database: "telegraf"
-    statsd_percentiles:
-      - 50
-      - 90
-      - 95
-      - 99
 
 affinity: {}

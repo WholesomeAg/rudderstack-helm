@@ -94,7 +94,6 @@ $ helm install --name my-release \
 
 **Note:** Configuration specific to:
 - Backend can be edited in [rudder-config.yaml](https://docs.rudderlabs.com/administrators-guide/config-parameters).
-- PostgreSQL can be edited in `pg_hba.conf`, `postgresql.conf`
 
 ## Components
 
@@ -102,10 +101,6 @@ Installing this Helm chart will deploy the following pods and containers in the 
 
 #### POD - {Release name}-rudderstack-0 :
 - rudderstack-backend
-- rudderstack-telegraf-sidecar
-
-#### POD - {Release name}-rudderstack-postgresql-0 :
-- {Release name}-rudderstack-postgresql
 
 #### POD - {Release name}-rudderstack-transformer-xxxxxxxxxx-xxxxx:
 - transformer
