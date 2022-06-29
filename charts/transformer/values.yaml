@@ -34,7 +34,8 @@ extraEnvVars:
   - name: ENABLE_FUNCTIONS
     value: "true"
 
-nodeSelector: {}
+nodeSelector:
+  agentpool: rudderstack
 
 tolerations: []
 

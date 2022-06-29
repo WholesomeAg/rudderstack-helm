@@ -2,7 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-
 # Deployment specific values for rudderstack.
 # Following values must be filled in for the deployment to succeed
 
@@ -45,7 +44,7 @@ backend:
     annotations:
       ## Refer https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer for more annotations
       service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-      ## For enabling https on aws, 
+      ## For enabling https on aws,
       ## uncomment below line with acm managed certificate arn and change port value below to 443
       # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
     type: LoadBalancer
@@ -57,7 +56,8 @@ backend:
     limits:
       memory: 5120Mi
 
-  nodeSelector: {}
+  nodeSelector:
+    agentpool: rudderstack
 
   persistence:
     mountPath: /data/rudderstack
@@ -111,9 +111,10 @@ transformer:
 
 postgresql:
   nameOverride: "rudderstack-postgresql"
-  postgresqlUsername: rudder
-  postgresqlPassword: password
-  postgresqlDatabase: jobsdb
+  host: put-host-here.azure.com
+  user: rudder
+  password: password
+  database: jobs
   postgresqlRunAsUser: 70
   imagePullPolicy: IfNotPresent
   image:
@@ -134,7 +135,7 @@ postgresql:
       memory: 4096Mi
 
 telegraf_sidecar:
-  enabled: true
+  enabled: false
   name: telegraf
   version: 1.5.0
   nameOverride: "rudderstack"

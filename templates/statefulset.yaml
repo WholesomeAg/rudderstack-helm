@@ -89,21 +89,25 @@ spec:
           - name: DEST_TRANSFORM_URL
             value: "http://{{ include "transformer.fullname" . }}:{{ .Values.transformer.service.port}}"
           - name: COMPUTE_DB_HOST_IN_K8S
-            value: "true"
-          - name: POSTGRES_POD_NAME
-            value: "{{ .Release.Name }}-{{ .Values.postgresql.nameOverride }}"
-          - name: POSTGRES_HEADLESS_SVC
-            value: "{{ .Release.Name }}-{{ .Values.postgresql.nameOverride }}-headless"
+            value: "false"
+          # - name: POSTGRES_POD_NAME
+          #   value: "{{ .Release.Name }}-{{ .Values.postgresql.nameOverride }}"
+          # - name: POSTGRES_HEADLESS_SVC
+          #   value: "{{ .Release.Name }}-{{ .Values.postgresql.nameOverride }}-headless"
+
           - name: JOBS_DB_HOST
-            value: "This is expected to be set by docker entrypoint script"
+            value: "{{ .Values.postgresql.host }}"
+            # value: "This is expected to be set by docker entrypoint script"
           - name: JOBS_DB_USER
-            value: "{{ .Values.postgresql.postgresqlUsername }}"
+            value: "{{ .Values.postgresql.user }}"
           - name: JOBS_DB_PORT
             value: "{{ .Values.postgresql.service.port }}"
           - name: JOBS_DB_DB_NAME
-            value: "{{ .Values.postgresql.postgresqlDatabase }}"
+            value: "{{ .Values.postgresql.database }}"
           - name: JOBS_DB_PASSWORD
-            value: "{{ .Values.postgresql.postgresqlPassword }}"
+            value: "{{ .Values.postgresql.password }}"
+          - name: JOBS_DB_SSL_MODE
+            value: "require"
           - name: INSTANCE_ID
             valueFrom:
               fieldRef:
